@@ -1,7 +1,10 @@
-#include"Commands/Commands.hpp"
+#include "Commands/Commands.hpp"
+
 // Entry point
-int main(){
-    Command *command = new CommandHelloWorld();
-    command->Run();
-    exit(0);
+int main()
+{
+    vector<command_ptr> commands;
+    commands.push_back(make_unique<CommandHelloWorld>());
+    command_choose_ptr choose = make_unique<CommandChoose>(move(commands));
+    choose->Run();
 }
