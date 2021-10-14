@@ -12,6 +12,7 @@ public:
     CommandChoose(const CommandChoose &) = delete;
     void Run()
     {
+        RunCycle();
     }
     void ShowCommands()
     {
@@ -30,14 +31,24 @@ public:
     }
     void RunCycle()
     {
-        while (cin)
+        cin.exceptions(std::iostream::badbit | std::iostream::failbit);
+        while (true)
         {
-            try{
-            cout << "Choose command:" << endl;
-            ShowCommands();
-            WaitingInput();
+            try
+            {
+                cout << "Choose command:" << endl;
+                ShowCommands();
+                WaitingInput();
             }
-            catch (){}
+            catch (out_of_range)
+            {
+                cout << "You enter not valid index" << endl;
+            }
+            catch(iostream::failure){
+                cout << "Enter number!!!" << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
         }
     }
 };
