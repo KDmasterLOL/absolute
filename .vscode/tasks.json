@@ -10,9 +10,11 @@
             "-I",
             "${workspaceFolder}",
             "-g",
-            "${file}",
+            "${workspaceFolder}/main.cpp",
             "-o",
-            "${fileDirname}/${fileBasenameNoExtension}"
+            "${workspaceFolder}/main",
+            "-l",
+            "ncurses"
         ],
         "options": {
             "cwd": "${workspaceFolder}"

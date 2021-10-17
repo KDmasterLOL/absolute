@@ -10,16 +10,16 @@ public:
         : Command("Command choose"), commands(std::move(commands)) {}
 
     CommandChoose(const CommandChoose &) = delete;
-    void Run()
+    void Run() override
     {
         RunCycle();
     }
     void ShowCommands()
     {
+        int index = 1;
         for (const auto &command : commands)
         {
-            int index = 1;
-            cout << index << ". " << command;
+            cout << index++ << ". " << command << endl;
         }
     }
     void WaitingInput()
@@ -27,10 +27,11 @@ public:
         int index;
         cin >> index;
         index--;
-        commands.at(index);
+        commands.at(index)->Run();
     }
     void RunCycle()
     {
+        system("clear");
         cin.exceptions(std::iostream::badbit | std::iostream::failbit);
         while (true)
         {
@@ -44,7 +45,8 @@ public:
             {
                 cout << "You enter not valid index" << endl;
             }
-            catch(iostream::failure){
+            catch (iostream::failure)
+            {
                 cout << "Enter number!!!" << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');

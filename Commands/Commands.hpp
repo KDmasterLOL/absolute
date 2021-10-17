@@ -5,3 +5,4 @@
 #include "Commands/Command.hpp"
 #include "Commands/CommandHelloWorld.hpp"
 #include "Commands/CommandChoose.hpp"
+#include"Commands/CommandConsoleGame.hpp"

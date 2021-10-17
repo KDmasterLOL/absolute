@@ -1,6 +1,6 @@
 #pragma once
 #include "Utils/Common.hpp"
-
+#include "Utils/Ncurses.hpp"
 // Base class of Commands
 
 class Command
@@ -12,7 +12,7 @@ public:
     virtual ~Command() {}
     virtual void Run() {}
     void ShowName() { cout << "Command name: " << name; }
-    friend ostream &operator<<(ostream &out, const Command* command)
+    friend ostream &operator<<(ostream &out, const Command *command)
     {
         out << command->name;
         return out;
