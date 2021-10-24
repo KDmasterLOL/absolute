@@ -1,8 +1,11 @@
 #pragma once
 
-class CommandConsoleGame : public Command
+class CommandConsoleGame final : public Command
 {
 private:
+    
+    map<shared_ptr<positionObject>, entityObject> objects_postions;
+
 public:
     CommandConsoleGame() : Command("Console game")
     {
@@ -10,20 +13,13 @@ public:
     ~CommandConsoleGame() {}
     void Run() override
     {
-        initscr();
-        raw();
-        keypad(stdscr, TRUE);
-        printw("You");
-        refresh();
-        int key = 0;
-        while (!(key == 'e'))
-        {
-            key = getch();
-            printw("Your key: %i/n", key);
-            refresh();
-        }
+        
+        
+        clear();
         endwin();
     }
+    
+
 };
 
 using command_console_game = unique_ptr<CommandConsoleGame>;

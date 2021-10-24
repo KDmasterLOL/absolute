@@ -1,13 +1,17 @@
 #pragma once
 
 // Takes vector of Command and wait input number Command and run that
-class CommandChoose : public Command
+class CommandChoose final : public Command
 {
     vector<command_ptr> commands;
+    bool play = true;
 
 public:
     CommandChoose(vector<command_ptr> commands)
-        : Command("Command choose"), commands(std::move(commands)) {}
+        : Command("Command choose"), commands(std::move(commands))
+    {
+        this->commands.push_back(make_unique<CommandExit>(&play));
+    }
 
     CommandChoose(const CommandChoose &) = delete;
     void Run() override
@@ -33,12 +37,13 @@ public:
     {
         system("clear");
         cin.exceptions(std::iostream::badbit | std::iostream::failbit);
-        while (true)
+        while (play)
         {
             try
             {
                 cout << "Choose command:" << endl;
                 ShowCommands();
+                cout << "Your enter - ";
                 WaitingInput();
             }
             catch (out_of_range)

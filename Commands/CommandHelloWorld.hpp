@@ -2,7 +2,7 @@
 
 // Output: Constructor - "WTF", Destructor - "Bye world", Run - Hello world
 
-class CommandHelloWorld : public Command
+class CommandHelloWorld final : public Command
 {
 public:
     CommandHelloWorld() : Command("Hello world") { cout << "WTF" << endl; }
