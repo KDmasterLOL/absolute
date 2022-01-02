@@ -4,7 +4,6 @@ class CommandConsoleGame final : public Command
 {
 private:
     
-    map<shared_ptr<positionObject>, entityObject> objects_postions;
 
 public:
     CommandConsoleGame() : Command("Console game")
@@ -14,9 +13,6 @@ public:
     void Run() override
     {
         
-        
-        clear();
-        endwin();
     }
     
 

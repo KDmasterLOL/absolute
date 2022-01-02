@@ -1,6 +1,7 @@
 #pragma once
 
 // Takes vector of Command and wait input number Command and run that
+
 class CommandChoose final : public Command
 {
     vector<command_ptr> commands;
@@ -20,23 +21,23 @@ public:
     }
     void ShowCommands()
     {
-        int index = 1;
-        for (const auto &command : commands)
-        {
-            cout << index++ << ". " << command << endl;
-        }
+        for (size_t index = 0; index < commands.size(); index++)
+            cout << index + 1 << ". " << commands[index] << endl;
     }
     void WaitingInput()
     {
         int index;
         cin >> index;
-        index--;
-        commands.at(index)->Run();
+
+        // Input more by one
+        commands.at(--index)->Run();
     }
     void RunCycle()
     {
         system("clear");
+
         cin.exceptions(std::iostream::badbit | std::iostream::failbit);
+        
         while (play)
         {
             try

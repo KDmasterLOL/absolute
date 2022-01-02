@@ -1,7 +1,11 @@
 #pragma once
+
+// Include libraries need for Commands
+
 #include "Utils/Common.hpp"
 #include "Utils/Ncurses.hpp"
 #include "Utils/ConsoleGame.hpp"
+
 // Base class of Commands
 
 class Command

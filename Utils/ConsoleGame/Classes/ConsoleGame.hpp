@@ -1,6 +1,8 @@
 #pragma once
 class ConsoleGame
 {
+private:
+    int console_size_x, console_size_y;
 
 protected:
     ConsoleGame() {}
@@ -11,6 +13,7 @@ protected:
         raw();
         keypad(stdscr, TRUE);
         noecho();
+        getmaxyx(stdscr, console_size_y, console_size_x);
     }
     void Draw()
     {

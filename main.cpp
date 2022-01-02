@@ -1,7 +1,6 @@
 #include "Commands/Commands.hpp"
 
 // Entry point
-
 int main()
 {
     vector<command_ptr> commands;

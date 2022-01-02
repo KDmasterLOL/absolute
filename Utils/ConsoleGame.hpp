@@ -1,6 +1,6 @@
 #pragma once
 
 // #include"Utils/ConsoleGame/"
-#include "Utils/ConsoleGame/Enum.hpp"
-#include "Utils/ConsoleGame/Structure.hpp"
-#include "Utils/ConsoleGame/ConsoleGame.hpp"
+#include "Utils/ConsoleGame/Enums.hpp"
+#include "Utils/ConsoleGame/Structures.hpp"
+#include "Utils/ConsoleGame/Classes.hpp"
