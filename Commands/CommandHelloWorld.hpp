@@ -5,9 +5,8 @@
 class CommandHelloWorld final : public Command
 {
 public:
-    CommandHelloWorld() : Command("Hello world") { cout << "WTF" << endl; }
-    ~CommandHelloWorld() { cout << "Bye world" << endl; }
-    void Run() override
+    CommandHelloWorld() : Command("Hello world"s) {}
+    void run() override
     {
         cout << "Hello world!!!" << endl;
     }

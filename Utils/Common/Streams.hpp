@@ -17,13 +17,16 @@ using std::streambuf;
 using std::streamsize;
 using std::stringstream;
 
-void ReadFile(string path_to_file, string &file_content)
+namespace StreamHelp
 {
-    ifstream file(path_to_file);
-    if (file.is_open())
+    void ReadFile(string path_to_file, string &file_content)
     {
-        stringstream str_buff_stream;
-        str_buff_stream << file.rdbuf();
-        file_content = str_buff_stream.str();
+        ifstream file(path_to_file);
+        if (file.is_open())
+        {
+            stringstream str_buff_stream;
+            str_buff_stream << file.rdbuf();
+            file_content = str_buff_stream.str();
+        }
     }
 }

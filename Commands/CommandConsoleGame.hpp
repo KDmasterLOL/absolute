@@ -6,11 +6,11 @@ private:
     
 
 public:
-    CommandConsoleGame() : Command("Console game")
+    CommandConsoleGame() : Command("Console game"s)
     {
     }
     ~CommandConsoleGame() {}
-    void Run() override
+    void run() override
     {
         
     }

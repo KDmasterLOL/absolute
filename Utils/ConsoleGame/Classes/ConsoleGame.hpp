@@ -7,7 +7,7 @@ private:
 protected:
     ConsoleGame() {}
     ~ConsoleGame() {}
-    virtual void Init()
+    virtual void init()
     {
         initscr();
         raw();
@@ -15,13 +15,13 @@ protected:
         noecho();
         getmaxyx(stdscr, console_size_y, console_size_x);
     }
-    void Draw()
+    void draw()
     {
     }
-    void DrawMap()
+    void drawMap()
     {
     }
-    void DrawCharacter() {}
-    void CheckHit() {}
-    virtual void RunCycle() {}
+    void drawCharacter() {}
+    void checkHit() {}
+    virtual void runCycle() {}
 };

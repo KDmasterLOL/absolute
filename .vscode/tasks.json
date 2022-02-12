@@ -5,7 +5,7 @@
         "label": "clang++ build active file",
         "command": "/usr/bin/clang++",
         "args": [
-            "-std=c++17",
+            "-std=c++2a",
             "-stdlib=libc++",
             "-I",
             "${workspaceFolder}",
@@ -16,6 +16,14 @@
             "-l",
             "ncurses"
         ],
+        "presentation": {
+            "echo": true,
+            "reveal": "always",
+            "focus": true,
+            "panel": "shared",
+            "showReuseMessage": true,
+            "clear": false
+        },
         "options": {
             "cwd": "${workspaceFolder}"
         },
@@ -26,5 +34,6 @@
             "kind": "build",
             "isDefault": true
         }
+
     }]
 }

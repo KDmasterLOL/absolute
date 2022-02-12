@@ -1,5 +1,5 @@
 #pragma once
-#include "Common/Text.hpp"
+#include "Common/String.hpp"
 #include "Common/Array.hpp"
 #include "Common/Streams.hpp"
 #include "Common/Memory.hpp"

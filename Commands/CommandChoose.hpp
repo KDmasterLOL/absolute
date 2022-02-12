@@ -1,63 +1,80 @@
 #pragma once
 
 // Takes vector of Command and wait input number Command and run that
-
-class CommandChoose final : public Command
+class CommandChoose final : public Command, public NcursesClasses::NcursesGraphics
 {
     vector<command_ptr> commands;
-    bool play = true;
+    stringstream s_str;
+    bool play = true, not_valid_index = false;
 
 public:
     CommandChoose(vector<command_ptr> commands)
-        : Command("Command choose"), commands(std::move(commands))
+        : Command("Command choose"s), commands(std::move(commands))
     {
         this->commands.push_back(make_unique<CommandExit>(&play));
     }
 
     CommandChoose(const CommandChoose &) = delete;
-    void Run() override
+    void run() override
     {
-        RunCycle();
+        runCycle();
     }
-    void ShowCommands()
+    void showCommands()
     {
         for (size_t index = 0; index < commands.size(); index++)
-            cout << index + 1 << ". " << commands[index] << endl;
+            s_str << index + 1 << ". " << commands[index] << endl;
     }
-    void WaitingInput()
+    void processingInput()
     {
         int index;
-        cin >> index;
+        char *str = new char[32];
+        // mvgetstr(, , str);
+
+        index = atoi(str);
 
         // Input more by one
-        commands.at(--index)->Run();
+        if (index < 1 || index > commands.size())
+            throw out_of_range(std::to_string(index));
+        else
+        {
+            endCurses();
+            commands[--index]->run();
+        }
     }
-    void RunCycle()
+    void initText()
     {
-        system("clear");
-
-        cin.exceptions(std::iostream::badbit | std::iostream::failbit);
-        
+        s_str.clear();
+        s_str << "Choose command:" << endl;
+        showCommands();
+        s_str << "Your enter - ";
+    }
+    void runCycle()
+    {
+        initCurses();
+        initText();
         while (play)
         {
             try
             {
-                cout << "Choose command:" << endl;
-                ShowCommands();
-                cout << "Your enter - ";
-                WaitingInput();
+                clear();
+                printw(s_str.str().c_str());
+
+                refresh();
+                processingInput();
             }
-            catch (out_of_range)
+            catch (out_of_range exc)
             {
-                cout << "You enter not valid index" << endl;
-            }
-            catch (iostream::failure)
-            {
-                cout << "Enter number!!!" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                if (!not_valid_index)
+                    s_str << endl
+                          << "You enter not valid index! - (" << exc.what() << ")" << endl;
+                not_valid_index = true;
             }
         }
+        endCurses();
+    }
+    void pipelineDraw() override
+    {
+        
     }
 };
 

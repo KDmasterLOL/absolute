@@ -15,7 +15,7 @@ class Command
 public:
     Command(string name) : name(name) {}
     virtual ~Command() {}
-    virtual void Run() {}
+    virtual void run() {}
     void ShowName() { cout << "Command name: " << name; }
     friend ostream &operator<<(ostream &out, const Command *command)
     {

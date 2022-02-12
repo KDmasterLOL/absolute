@@ -4,8 +4,8 @@ class CommandExit final : public Command
     bool *play = nullptr;
 
 public:
-    CommandExit(bool *play = nullptr) : Command("Exit"), play(play) {}
-    void Run() override
+    CommandExit(bool *play = nullptr) : Command("Exit"s), play(play) {}
+    void run() override
     {
         if (play != nullptr)
             *play = false;
