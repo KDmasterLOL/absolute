@@ -1,0 +1,3 @@
+/Users/kdmaster/Documents/Current project/Absolute/Programs/Absolute/build/CMakeFiles/Absolute.exec.dir
+/Users/kdmaster/Documents/Current project/Absolute/Programs/Absolute/build/CMakeFiles/edit_cache.dir
+/Users/kdmaster/Documents/Current project/Absolute/Programs/Absolute/build/CMakeFiles/rebuild_cache.dir
