@@ -1,3 +1,0 @@
-/Volumes/MAC-FLASH/Documents/Code/C++/absolute/Programs/Hello World/build/CMakeFiles/HelloWorld.exec.dir
-/Volumes/MAC-FLASH/Documents/Code/C++/absolute/Programs/Hello World/build/CMakeFiles/edit_cache.dir
-/Volumes/MAC-FLASH/Documents/Code/C++/absolute/Programs/Hello World/build/CMakeFiles/rebuild_cache.dir
