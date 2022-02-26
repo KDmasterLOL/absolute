@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/kdmaster/Library/Mobile Documents/com~apple~CloudDocs/Documents/Current project/absolute/build",
+  "command": "/usr/bin/clang++ -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -o CMakeFiles/Absolute.dir/main.cpp.o -c \"/Users/kdmaster/Library/Mobile Documents/com~apple~CloudDocs/Documents/Current project/absolute/main.cpp\"",
+  "file": "/Users/kdmaster/Library/Mobile Documents/com~apple~CloudDocs/Documents/Current project/absolute/main.cpp"
+}
+]

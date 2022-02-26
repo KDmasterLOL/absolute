@@ -6,13 +6,12 @@
         "command": "/usr/bin/clang++",
         "args": [
             "-std=c++2a",
-            "-stdlib=libc++",
             "-I",
             "${workspaceFolder}",
             "-g",
-            "${workspaceFolder}/main.cpp",
+            "${workspaceFolder}/Programs/Absolute/Absolute.cpp",
             "-o",
-            "${workspaceFolder}/main",
+            "${workspaceFolder}/Programs/Absolute/Build/Absolute.exec",
             "-l",
             "ncurses"
         ],
