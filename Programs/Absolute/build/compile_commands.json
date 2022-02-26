@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/kdmaster/Documents/Current project/Absolute/Programs/Absolute/build",
+  "command": "/usr/bin/clang++ -I/Users/kdmaster/Documents/CommonLib -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -std=gnu++17 -o CMakeFiles/Absolute.exec.dir/Absolute.cpp.o -c \"/Users/kdmaster/Documents/Current project/Absolute/Programs/Absolute/Absolute.cpp\"",
+  "file": "/Users/kdmaster/Documents/Current project/Absolute/Programs/Absolute/Absolute.cpp"
+}
+]
