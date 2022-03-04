@@ -10,7 +10,7 @@ struct Exec
 
     const string &getName()
     {
-        if (path_executable.empty())
+        if (path_executable.empty()) // Error handling: if empty assign and print error message
         {
             cerr << name_program << " - empty executable path\n";
             name = "Empty name";
@@ -22,7 +22,7 @@ struct Exec
     const string &getDescription()
     {
 
-        if (path_description.empty()) // Error handling:
+        if (path_description.empty()) // Error handling: if empty assign and print error message
         {
             cerr << name_program << " - empty description path\n";
             description = "Empty description";
@@ -30,15 +30,18 @@ struct Exec
         if (description.empty())
         {
             ifstream file(path_description, std::ios::end);
-            int size = file.tellg();
-            if (size == -1) // Error handling:
+            auto size = file.tellg();
+            if (size == -1) // Error handling: if empty assign and print error message
             {
                 description = "Empty description";
                 cerr << name_program << " - empty description file\n";
             }
-            description.resize(size);
-            file.seekg(0);
-            file.read(&description[0], size);
+            else
+            {
+                description.resize(size);
+                file.seekg(0);
+                file.read(&description[0], size);
+            }
         }
         return description;
     }
@@ -52,54 +55,70 @@ class ExecManager
 private:
     fs::path path_executables;
     fs::path self_path;
-    map<string, Exec> paths;
+    // map<string, Exec> paths;
+    vector<Exec> paths;
 
 public:
     ExecManager(fs::path path)
     {
         if (path.is_relative())
             path = fs::absolute(path).lexically_normal();
-        self_path = path;
+        self_path = path.parent_path().parent_path();
         path_executables = path.parent_path().parent_path().parent_path();
     }
 
-    // Found executables in programs' build directory
-    void find()
+    void find() // Found executables in programs' build directory
     {
-        string current_program;
         for (fs::recursive_directory_iterator iterator(path_executables); iterator != fs::recursive_directory_iterator(); iterator++)
         {
             auto &path = iterator->path();
 
-            if (iterator.depth() == 0 && iterator->is_directory()) // Get name directory on depth 0 and assign to current_program and insert to paths with empty Exec
+            if (iterator->path().compare(self_path) == 0) // Skip if it self_path
             {
-                current_program = path.filename();
-                paths.insert(pair<string, Exec>(current_program, Exec(current_program)));
+                iterator.disable_recursion_pending();
+                continue;
             }
 
-            if (path.extension() == ".exec" /* && path.compare(self_path) != 0 */) // Assign program's path executable to Exec of current_program
-                paths.at(current_program).path_executable = path;
-            else if (path.filename() == "Description") // Assign program's path Description to Exec of current_program
-                paths.at(current_program).path_description = path;
+            if (iterator.depth() == 0 && iterator->is_directory()) // Initialise current path in paths
+                paths.push_back(Exec(path.filename()));
 
+            if (path.extension() == ".exec") // Assign program's path executable to Exec of last element of paths
+                paths.back().path_executable = path;
+            else if (path.filename() == "Description") // Assign program's path Description to Exec of last element of paths
+                paths.back().path_description = path;
             if (iterator.depth() >= 2 || (iterator.depth() == 1 && (iterator->is_directory() && path.filename() != "build"))) // Stop recursion if depth greater than 2 or next directory not "build"
                 iterator.disable_recursion_pending();
         }
     }
 
-    // Print description by executing program with argument
-    void printExecInfo()
+    void printExecInfo() // Print description of Exec files and order in
     {
-        int index;
-        for (auto &path : paths)
+
+        for (auto path : paths)
         {
-            cout << index << ". " << path.second.getName() << " - " << path.second.getDescription() << '\n';
-            index++;
+            static short index;
+            cout << index++ << ". " << path.getName() << "  -  " << path.getDescription() << endl;
         }
     }
 
     void choose()
     {
+        size_t index;
+        cin.exceptions(std::ios::failbit);
+        try
+        {
+            cin >> index;
+            auto path = paths.at(index).path_executable.c_str();
+            execl(path, path);
+        }
+        catch (std::ios::failure)
+        {
+            cout << "You can enter only numbers(0-9)" << endl;
+        }
+        catch (out_of_range)
+        {
+            cout << "You enter wrong number of command" << endl;
+        }
     }
 };
 
@@ -108,5 +127,6 @@ int main(int argc, char **argv)
     ExecManager man(argv[0]);
     man.find();
     man.printExecInfo();
+    man.choose();
     return 0;
 }
