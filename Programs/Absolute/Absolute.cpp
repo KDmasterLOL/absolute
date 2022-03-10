@@ -94,30 +94,37 @@ public:
     void printExecInfo() // Print description of Exec files and order in
     {
 
+        cout << "0. Exit\n";
         for (auto path : paths)
         {
-            static short index;
-            cout << index++ << ". " << path.getName() << "  -  " << path.getDescription() << endl;
+            static short index{1};
+            cout << index++ << ". " << path.getName() << "  -  " << path.getDescription() << '\n';
         }
     }
 
     void choose()
     {
-        size_t index;
+
         cin.exceptions(std::ios::failbit);
-        try
+        while (true)
         {
-            cin >> index;
-            auto path = paths.at(index).path_executable.c_str();
-            execl(path, path);
-        }
-        catch (std::ios::failure)
-        {
-            cout << "You can enter only numbers(0-9)" << endl;
-        }
-        catch (out_of_range)
-        {
-            cout << "You enter wrong number of command" << endl;
+            try
+            {
+                size_t index;
+                cin >> index;
+                if (index == 0)
+                    break;
+                auto path = paths.at(index - 1 /* index 0 is exit */).path_executable.c_str();
+                execl(path, path);
+            }
+            catch (std::ios::failure)
+            {
+                cout << "You can enter only numbers(0-9)" << endl;
+            }
+            catch (out_of_range)
+            {
+                cout << "You enter wrong number of command" << endl;
+            }
         }
     }
 };
